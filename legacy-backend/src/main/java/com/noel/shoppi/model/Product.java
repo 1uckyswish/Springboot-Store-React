@@ -19,13 +19,17 @@ public class Product {
 
     private String imageUrl;
 
-    public Product(String name, String description, double price, String category, String imageUrl) {
+    private String color;
+
+    public Product(String name, String description, double price, String category, String imageUrl, String color) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.category = category;
         this.imageUrl = imageUrl;
+        this.color = color;
     }
+
 
     public Product() {
     }
@@ -77,5 +81,12 @@ public class Product {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-    // Getters and setters
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 }
