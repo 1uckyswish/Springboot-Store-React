@@ -1,10 +1,12 @@
 package com.noel.recipe.service;
 
 import com.noel.recipe.entity.User;
+import com.noel.recipe.exception.AuthenticationFailedException;
 import com.noel.recipe.exception.ResourceNotFoundException;
 import com.noel.recipe.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
@@ -48,5 +50,16 @@ public class UserService {
             throw new ResourceNotFoundException("User", "id", id);
         }
         userRepository.deleteById(id);
+    }
+
+    public User authenticateUser(String email, String password) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
+
+        if (!password.equals(user.getPassword())) {
+            throw new AuthenticationFailedException("Incorrect password");
+        }
+
+        return user;
     }
 }
