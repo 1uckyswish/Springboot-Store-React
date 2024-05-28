@@ -52,4 +52,8 @@ public class RecipeService {
         }
         recipeRepository.deleteById(id);
     }
+
+    public List<Recipe> getRecipesByUserId(Long userId) {
+        return recipeRepository.findByUserId(userId);
+    }
 }

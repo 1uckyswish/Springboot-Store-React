@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 const API_BASE_URL = 'http://localhost:8080';
 
@@ -26,14 +27,15 @@ const Recipes = () => {
                 {recipes.map((card, index) => (
                     <div key={index} className="card lg:card-side bg-base-100 shadow-xl" style={{ flexDirection: 'column' }}>
                         <figure>
-                            <img src={card.imageUrl} alt="Recipe" />
+                            <img src={card?.imageUrl} alt="Recipe" />
                         </figure>
                         <div className="card-body">
-                            <h2 className="card-title">{card.name}</h2>
-                            <p>{card.description}</p>
+                            <h2 className="card-title">{card?.name}</h2>
+                            <p>{card?.description}</p>
                             <div className="card-actions justify-evenly mt-4">
-                                <button className="btn btn-accent">View Recipe</button>
-                                <button className="btn btn-neutral-content">View User</button>
+                                <Link to={`/recipe/${card?.id}`} className="btn btn-accent">View Recipe</Link>
+                                <Link to={`/author-recipes/${card?.userId}`} className="btn btn-neutral-content">More Recipes</Link>
+
                             </div>
                         </div>
                     </div>
